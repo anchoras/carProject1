@@ -1,8 +1,9 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface DAO<T> {
-    ArrayList<T> findAll(T t) throws SQLException;
+    HashMap<Integer, T> findAll() throws SQLException;
     void delete(T t);
     void add(T t);
     void update(T t);

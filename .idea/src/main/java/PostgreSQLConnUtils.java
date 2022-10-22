@@ -8,12 +8,20 @@ public class PostgreSQLConnUtils {
     private static String password;
     private static Connection conn;
 
+    static {
+        url = "jdbc:postgresql://localhost:5433/";
+        dbName = "carPark1";
+        user = "postgres";
+        password = "password";
+        conn = null;
+    }
+
     public PostgreSQLConnUtils() {
-        this.url = "jdbc:postgresql://localhost:5433/";
-        this.dbName = "myFirstTempDB";
-        this.user = "postgres";
-        this.password = "password";
-        this.conn = null;
+        url = "jdbc:postgresql://localhost:5433/";
+        dbName = "carPark1";
+        user = "postgres";
+        password = "password";
+        conn = null;
     }
 
     public PostgreSQLConnUtils(String url, String dbName, String user, String password) {
@@ -79,7 +87,10 @@ public class PostgreSQLConnUtils {
                 } else {
                     System.out.println("Failed to make connection!");
                 }
-            } else { return conn; }
+            }  else {
+                System.out.println("Returning existing connection");
+                return  conn;
+            }
         } catch (SQLException e) {
             System.err.format("SQL state: %s\n%s", e.getSQLState(), e.getMessage());
         }
@@ -98,7 +109,10 @@ public class PostgreSQLConnUtils {
                 } else {
                     System.out.println("Failed to make connection!");
                 }
-            } else { return  conn; }
+            } else {
+                System.out.println("Returning existing connection");
+                return  conn;
+            }
         } catch (SQLException e) {
             System.err.format("SQL state: %s\n%s", e.getSQLState(), e.getMessage());
         }

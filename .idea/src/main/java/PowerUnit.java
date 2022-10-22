@@ -47,20 +47,21 @@ public class PowerUnit {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof PowerUnit)) return false;
         PowerUnit powerUnit = (PowerUnit) o;
-        return Double.compare(powerUnit.getMaxcapacity(), getMaxcapacity()) == 0 && getType().equals(powerUnit.getType());
+        return Double.compare(powerUnit.maxcapacity, maxcapacity) == 0 && type.equals(powerUnit.type) && name.equals(powerUnit.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getType(), getMaxcapacity());
+        return Objects.hash(getType(), getName(), getMaxcapacity());
     }
 
     @Override
     public String toString() {
         return "PowerUnit{" +
                 "type='" + type + '\'' +
+                ", name='" + name + '\'' +
                 ", maxcapacity=" + maxcapacity +
                 '}';
     }

@@ -4,5 +4,7 @@
 # Datasource local storage ignored files
 /../../../../../../:\Users\Admin\IdeaProjects\CarPark\.idea/dataSources/
 /dataSources.local.xml
+*.class
+**/target
 # Editor-based HTTP Client requests
 /httpRequests/

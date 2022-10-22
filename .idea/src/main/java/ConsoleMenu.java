@@ -17,12 +17,12 @@ public class ConsoleMenu {
     static
     {
         final SortedSet<String> ecmds = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
-        ecmds.addAll(Arrays.asList("exit", "done", "quit", "end", "fino"));
+        ecmds.addAll(Arrays.asList("exit", "done", "quit", "end", "fino", "e", "q"));
         EXIT_COMMANDS = Collections.unmodifiableSortedSet(ecmds);
         final SortedSet<String> hcmds = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
         hcmds.addAll(Arrays.asList("help", "helpi", "?"));
         final SortedSet<String> mcmds = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
-        mcmds.addAll(Arrays.asList("first", "second", "third"));
+        mcmds.addAll(Arrays.asList("first", "1", "second", "2", "third", "3"));
         MENU_COMMANDS = Collections.unmodifiableSortedSet(mcmds);
         final SortedSet<String> yeswords = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
         yeswords.addAll(Arrays.asList("yes", "y", "confirm"));
@@ -39,9 +39,9 @@ public class ConsoleMenu {
             //System.out.println("Menu: \n1. \n2. \n0. \n...\n\n");
             System.out.println("Menu: \n" + MENU_COMMANDS.toString());
             switch (getMainMenuInput()) {
-                case "first" -> executeFirst();
-                case "second" -> executeSecond();
-                case "third" -> executeThird();
+                case "1", "first" -> executeFirst();
+                case "2", "second" -> executeSecond();
+                case "3", "third" -> executeThird();
                 case "default" -> System.out.println("Default menu option...");
             }
         }
@@ -72,7 +72,12 @@ public class ConsoleMenu {
 
 
     private int getIntInput() {
-        int choosenState = scanner.nextInt();
+        int choosenState = 0;
+        while (!scanner.hasNextInt()) {
+            System.out.println("input Integer ...");
+            scanner.nextInt();
+        };
+        choosenState = scanner.nextInt();
         return choosenState;
     }
 
@@ -104,6 +109,15 @@ public class ConsoleMenu {
         boolean isReturnToMenu = false;
         while(!isReturnToMenu) {
             System.out.println("Second menu option entered");
+            PowerUnitDAO puDAO = new PowerUnitDAO();
+            PowerUnitCollection punits = new PowerUnitCollection();
+            try {
+                punits = new PowerUnitCollection(puDAO.findAll());
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                System.out.println(e.getStackTrace());
+            }
+            System.out.println(punits.toString());
             System.out.println("Return to menu? : ");
             isReturnToMenu = getYesNoInput();
         }
@@ -116,7 +130,8 @@ public class ConsoleMenu {
             PowerUnitDAO puDAO = new PowerUnitDAO();
             PowerUnit punit = new PowerUnit();
             try {
-                punit = puDAO.findByID(1);
+                System.out.println("input id number...");
+                punit = puDAO.findByID(getIntInput());
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 System.out.println(e.getStackTrace());
@@ -128,7 +143,7 @@ public class ConsoleMenu {
     }
 
     private void executeExit() {
-        System.out.println("Prepare to shutting down...");
+        System.out.println("Preparing to shutting down");
         this.isRunning = false;
     }
 }
