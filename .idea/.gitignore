@@ -5,6 +5,6 @@
 /../../../../../../:\Users\Admin\IdeaProjects\CarPark\.idea/dataSources/
 /dataSources.local.xml
 *.class
-**/target
+**/target/**
 # Editor-based HTTP Client requests
 /httpRequests/

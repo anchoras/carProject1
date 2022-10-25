@@ -4,22 +4,22 @@ import java.util.Objects;
 
 public class CustomerCollection {
     private HashMap<Integer, Customer> customers;
-    private int personnelCustomerNumber;
+    private int id;
 
     public CustomerCollection() {
         this.customers = new HashMap<Integer, Customer>();
-        this.personnelCustomerNumber = 0;
+        this.id = 0;
         System.out.println("This customers collection was created empty");
     }
 
-    public CustomerCollection(HashMap<Integer, Customer> customers, int personnelCustomerNumber) {
+    public CustomerCollection(HashMap<Integer, Customer> customers, int id) {
         this.customers = customers;
-        this.personnelCustomerNumber = personnelCustomerNumber;
+        this.id = id;
     }
 
     public CustomerCollection(HashMap<Integer, Customer> customers) {
         this.customers = customers;
-        this.personnelCustomerNumber = customers.size();
+        this.id = customers.size();
     }
 
 
@@ -27,8 +27,8 @@ public class CustomerCollection {
         return customers;
     }
 
-    public int getPersonnelCustomerNumber() {
-        return personnelCustomerNumber;
+    public int getId() {
+        return id;
     }
 
 
@@ -40,7 +40,7 @@ public class CustomerCollection {
                 break;
             }
         }
-        if (!alreadyInList) { customers.put(++personnelCustomerNumber, customer); }
+        if (!alreadyInList) { customers.put(++id, customer); }
     }
 
 
@@ -61,7 +61,7 @@ public class CustomerCollection {
     public String toString() {
         return "CustomerCollection{" +
                 "customers=" + customers +
-                ", personnelCustomerNumber=" + personnelCustomerNumber +
+                ", id=" + id +
                 '}';
     }
 }
